@@ -9,13 +9,13 @@ BASILICA_API_KEY = os.getenv("BASILICA_API_KEY")
 connection = basilica.Connection(BASILICA_API_KEY)
 print(type(connection)) #<class 'basilica.Connection'>
 
+if __name__ == "__main__":
+    embedding = connection.embed_sentence('hey this is a cool tweet', model='twitter')
+    print(embedding)
+    #a list of 768 numbers
 
-embedding = connection.embed_sentence('hey this is a cool tweet', model='twitter')
-print(embedding)
-#a list of 768 numbers
-
-tweets = ["Hello World", "Artifical Intelligence", "another tweet #cool"]
-embeddings = connection.embed_sentences(tweets, model = 'twitter')
-for embed in embeddings:
-    print("-------------")
-    print(len(embed))
+    tweets = ["Hello World", "Artifical Intelligence", "another tweet #cool"]
+    embeddings = connection.embed_sentences(tweets, model = 'twitter')
+    for embed in embeddings:
+        print("-------------")
+        print(len(embed))
