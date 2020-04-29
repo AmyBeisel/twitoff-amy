@@ -34,7 +34,7 @@ def twitoff_predict():
     #
 
     tweet_embeddings = []
-    tweet_labels = []
+    corresponding_screen_names = []
     user_a = User.query.filter(User.screen_name == screen_name_a).one()
     user_b = User.query.filter(User.screen_name == screen_name_b).one()
     tweets_a = user_a.tweets
@@ -42,11 +42,11 @@ def twitoff_predict():
     all_tweets = tweets_a + tweets_b
     for tweet in all_tweets:
         tweet_embeddings.append(tweet.embedding)
-        tweet_labels.append(tweet.user.screen_name)
-    print("EMBEDDINGS:", len(tweet_embeddings), "LABELS:", len(tweet_labels))
+        corresponding_screen_names.append(tweet.user.screen_name)
+    print("EMBEDDINGS:", len(tweet_embeddings), "LABELS:", len(corresponding_screen_names))
 
     classifier = LogisticRegression(random_state=0, solver="lbfgs", multi_class="multinomial")
-    classifier.fit(tweet_embeddings, tweet_labels)
+    classifier.fit(tweet_embeddings, corresponding_screen_names)
 
     #
     # make a prediction
