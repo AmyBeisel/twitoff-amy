@@ -1,6 +1,7 @@
 
 # web_app/__init__.py
-
+import os
+from dotenv import load_dotenv
 from flask import Flask
 
 from web_app.models import db, migrate
@@ -10,6 +11,7 @@ from web_app.routes.twitter_routes import twitter_routes
 from web_app.routes.admin_routes import admin_routes
 from web_app.routes.stats_routes import stats_routes
 
+load_dotenv()
 
 DATABASE_URI = "sqlite:////Users/amybeisel/Code_Here/twitoff-amy/twitoff_development.db"
 SECRET_KEY = "super secret"
