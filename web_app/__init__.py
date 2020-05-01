@@ -13,12 +13,12 @@ from web_app.routes.stats_routes import stats_routes
 
 load_dotenv()
 
-DATABASE_URI = "sqlite:////Users/amybeisel/Code_Here/twitoff-amy/twitoff_development.db"
-SECRET_KEY = "super secret"
+DATABASE_URL = os.getenv("DATABASE_URL")
+SECRET_KEY = os.getenv("SECRET_KEY", default = "super secret")
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = SECRET_KEY #emable flash messaging via sessions
-    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
     migrate.init_app(app, db)
